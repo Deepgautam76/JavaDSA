@@ -25,7 +25,7 @@ public class valideParenthithes {
         else return true;
     }
 
-    //-----case:2 all type braces "(){}[]"
+    //CASE:2:- all type braces "(){}[]" check valid or not
     public static boolean isvalidealltype(String pattern){
         int len=pattern.length();
         Stack<Character> ch=new Stack<>();
@@ -35,15 +35,15 @@ public class valideParenthithes {
             if(c=='(' || c=='{' || c=='['){
                 ch.push(c);
             }else if(c==')') {
-                if(ch.isEmpty()) return false;
                 if(ch.peek()=='(') ch.pop();
+                else return false;
             } else if (c=='}') {
-                if(ch.isEmpty()) return false;
                 if(ch.peek()=='{') ch.pop();
+                else return false;
             }
             else if (c==']') {
-                if(ch.isEmpty()) return false;
                 if(ch.peek()=='[') ch.pop();
+                 else return false;
             }
         }
 
@@ -52,24 +52,31 @@ public class valideParenthithes {
         else return true;
     }
 
-//    //How much braces delete to make valid pattern?
-//    public static int NoOpationToMakevalide(String pattern){
-//
-//        int len=pattern.length();
-//        //base case
-//        if(len==0) return 0;
-//        Stack<Character> ch=new Stack<>();
-//
-//        for(int i=0; i<len; i++){
-//            if(pattern.charAt(i)=='('){
-//                ch.push('(');
-//            }else {
-////                if(ch.isEmpty()) return false;
-//                if(ch.peek()=='(') ch.pop();
-//            }
-//        }
-//        return ch.size();
-//    }
+    //How much braces delete to make valid pattern?
+    public static int NoOfOprationToMakeValid(String st){
+
+        int len=st.length();
+        //base case
+        if(len==0) return 0;
+        Stack<Character> ch=new Stack<>();
+
+        for(int i=0; i<len; i++){
+            char c=st.charAt(i);
+            if(c=='('){
+                ch.push(c);
+            }else {
+                //This condition check stack is empty or not
+                //Because can't look the peek in empty stack
+                if(!ch.isEmpty()){
+                    if(ch.peek()=='(') ch.pop();
+                    else ch.push(c);
+                }else{
+                    ch.push(c);
+                }
+            }
+        }
+        return ch.size();
+    }
 
 
     public static void main(String[] args){
@@ -80,8 +87,8 @@ public class valideParenthithes {
             String str = sc.nextLine();
 
 //            System.out.println("This pattern is valid : " + isvalide(str));
-            System.out.println("This pattern is valid : " + isvalidealltype(str));
-//            System.out.println("This pattern is valid : " + NoOpationToMakevalide(str));
+//            System.out.println("This pattern is valid : " + isvalidealltype(str));
+            System.out.println("This pattern is valid : " + NoOfOprationToMakeValid(str));
         }
 
     }
