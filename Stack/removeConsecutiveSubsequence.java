@@ -1,8 +1,10 @@
-package src;
+package Stack;
 
 import java.util.Stack;
 
-public class removeConsecutiveSubsequenc {
+
+//Remove subsequence
+public class removeConsecutiveSubsequence {
     public static int[] remove(int[] arr){
         int len=arr.length;
         if(len<=1) return arr;
